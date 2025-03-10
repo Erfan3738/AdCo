@@ -46,7 +46,7 @@ def init_log_path(args):
         mkdir(save_path)
     return save_path
 
-def main_worker(gpu, ngpus_per_node, args):
+def main_worker(gpu, args):
     params = vars(args)
     
     print(vars(args))
