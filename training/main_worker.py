@@ -105,7 +105,7 @@ def main_worker(gpu, args):
             train_dataset = datasets.ImageFolder(
                 traindir, multi_transform)
         else:
-            augmentation = [
+            augmentation = transforms.Compose([
                 transforms.RandomResizedCrop(32),
                 transforms.RandomApply([
                     transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)  # not strengthened
@@ -115,7 +115,7 @@ def main_worker(gpu, args):
                 transforms.RandomHorizontalFlip(),
                 transforms.ToTensor(),
                 normalize
-            ]
+            ])
             train_dataset = CIFAR10(root='./datasets', train=True, download=True, transform=TwoCropsTransform(augmentation))
 
     else:
