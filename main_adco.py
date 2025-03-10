@@ -13,7 +13,7 @@ def main(args):
         os.environ['CUDA_VISIBLE_DEVICES'] = args.choose
         print("Current we choose gpu:%s" % args.choose)
     #config environment
-    ngpus_per_node=Config_Environment(args)
+    #ngpus_per_node=Config_Environment(args)
 
     # call training main control function
     if args.multiprocessing_distributed==1:
@@ -25,7 +25,7 @@ def main(args):
         mp.spawn(main_worker, nprocs=ngpus_per_node, args=(ngpus_per_node, args))
     else:
         # Simply call main_worker function
-        main_worker(args.gpu, ngpus_per_node, args)
+        main_worker(args.gpu, args)
 
 
 if __name__ == '__main__':
