@@ -130,8 +130,8 @@ def main_worker(gpu, args):
     test_dataset =CIFAR10(root='./datasets', train=False, download=True, transform=transform_test)
             
     train_loader = DataLoader(train_dataset, shuffle=True, batch_size=args.batch_size,pin_memory=True,num_workers=args.workers,drop_last=True)
-    #val_loader = DataLoader(val_dataset, shuffle=False, batch_size=args.knn_batch_size,pin_memory=True,num_workers=args.workers,drop_last=False)
-    #test_loader = DataLoader(test_dataset, shuffle=False, batch_size=args.knn_batch_size,pin_memory=True,num_workers=args.workers,drop_last=False)
+    val_loader = DataLoader(val_dataset, shuffle=False, batch_size=args.batch_size,pin_memory=True,num_workers=args.workers,drop_last=False)
+    test_loader = DataLoader(test_dataset, shuffle=False, batch_size=args.batch_size,pin_memory=True,num_workers=args.workers,drop_last=False)
             
 
     save_path = init_log_path(args)
@@ -154,6 +154,13 @@ def main_worker(gpu, args):
         # train for one epoch
         acc1 = train(train_loader, model,Memory_Bank, criterion,
                                 optimizer, epoch, args)
+        if epoch%5 ==0 or epoch<=20:
+            print("gpu consuming before cleaning:", torch.cuda.memory_allocated()/1024/1024)
+            torch.cuda.empty_cache()
+            print("gpu consuming after cleaning:", torch.cuda.memory_allocated()/1024/1024)
+            acc=knn_monitor(model.encoder_q, val_loader, test_loader,epoch, args,global_k = 20) 
+            print({'*KNN monitor Accuracy': acc})
+            
         is_best=best_Acc>acc1
         best_Acc=max(best_Acc,acc1)
         if not args.multiprocessing_distributed or (args.multiprocessing_distributed
