@@ -1,8 +1,8 @@
 import builtins
 import torch.distributed as dist
 import os
-#import torchvision.models as models
-import model.ResNet as models
+import torchvision.models as models
+#import model.ResNet as models
 import torch
 import torch.nn as nn
 import torch.backends.cudnn as cudnn
