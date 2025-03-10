@@ -61,7 +61,7 @@ def main_worker(gpu, args):
                            args.moco_dim, args.moco_m, args.moco_t, args.mlp)
 #     print(model)
 
-        else:
+
     model.cuda()
     Memory_Bank.cuda()
 
