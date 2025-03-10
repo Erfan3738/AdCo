@@ -167,24 +167,24 @@ class AdCo(nn.Module):
 
             return q, k
         else:
-            q = self.encoder_q(im_q)  # queries: NxC
+            q = self.encoder_q(im_q,use_feature=False)  # queries: NxC
             q = nn.functional.normalize(q, dim=1)
             q_pred=q
-            k_pred = self.encoder_q(im_k)  # queries: NxC
+            k_pred = self.encoder_q(im_k,use_feature=False)  # queries: NxC
             k_pred = nn.functional.normalize(k_pred, dim=1)
             with torch.no_grad():  # no gradient to keys
                 # if update_key_encoder:
                 self._momentum_update_key_encoder()  # update the key encoder
 
                 im_q_, idx_unshuffle = self._batch_shuffle_single_gpu(im_q)
-                q = self.encoder_k(im_q_)  # keys: NxC
+                q = self.encoder_k(im_q_,use_feature=False)  # keys: NxC
                 q = nn.functional.normalize(q, dim=1)
                 q = self._batch_unshuffle_single_gpu(q, idx_unshuffle)
                 q = q.detach()
 
 
                 im_k_, idx_unshuffle = self._batch_shuffle_single_gpu(im_k)
-                k = self.encoder_k(im_k_)  # keys: NxC
+                k = self.encoder_k(im_k_,use_feature=False)  # keys: NxC
                 k = nn.functional.normalize(k, dim=1)
                 k = self._batch_unshuffle_single_gpu(k, idx_unshuffle)
                 k = k.detach()
