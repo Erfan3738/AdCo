@@ -91,6 +91,26 @@ class AdCo(nn.Module):
         idx_this = idx_unshuffle.view(num_gpus, -1)[gpu_idx]
 
         return x_gather[idx_this]
+        
+    @torch.no_grad()
+    def _batch_shuffle_single_gpu(self, x):
+        """
+        Batch shuffle, for making use of BatchNorm.
+        """
+        # random shuffle index
+        idx_shuffle = torch.randperm(x.shape[0]).cuda()
+
+        # index for restoring
+        idx_unshuffle = torch.argsort(idx_shuffle)
+
+        return x[idx_shuffle], idx_unshuffle
+        
+    @torch.no_grad()
+    def _batch_unshuffle_single_gpu(self, x, idx_unshuffle):
+        """
+        Undo batch shuffle.
+        """
+        return x[idx_unshuffle]
 
     def forward(self, im_q, im_k):
         """
@@ -151,17 +171,17 @@ class AdCo(nn.Module):
                 # if update_key_encoder:
                 self._momentum_update_key_encoder()  # update the key encoder
 
-                im_q, idx_unshuffle = self._batch_shuffle_ddp(im_q)
-                q = self.encoder_k(im_q)  # keys: NxC
+                im_q_, idx_unshuffle = self._batch_shuffle_single_gpu(im_q)
+                q = self.encoder_k(im_q_)  # keys: NxC
                 q = nn.functional.normalize(q, dim=1)
-                q = self._batch_unshuffle_ddp(q, idx_unshuffle)
+                q = self._batch_unshuffle_single_gpu(q, idx_unshuffle)
                 q = q.detach()
 
 
-                im_k, idx_unshuffle = self._batch_shuffle_ddp(im_k)
-                k = self.encoder_k(im_k)  # keys: NxC
+                im_k_, idx_unshuffle = self._batch_shuffle_single_gpu(im_k)
+                k = self.encoder_k(im_k_)  # keys: NxC
                 k = nn.functional.normalize(k, dim=1)
-                k = self._batch_unshuffle_ddp(k, idx_unshuffle)
+                k = self._batch_unshuffle_single_gpu(k, idx_unshuffle)
                 k = k.detach()
                 
             return q_pred,k_pred,q, k
