@@ -18,6 +18,7 @@ from training.train import train, init_memory
 from data_processing.loader import TwoCropsTransform, GaussianBlur
 from torchvision.datasets import CIFAR10
 from torch.utils.data import DataLoader
+from ops.knn import knn_monitor
 
 def init_log_path(args):
     """
