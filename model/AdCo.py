@@ -25,11 +25,11 @@ class AdCo(nn.Module):
         # create the encoders
         # num_classes is the output fc dimension
         self.encoder_q = base_encoder(num_classes=dim)
-        self.encoder_q.conv1 = nn.Conv2d(3, 64, 3, 1, 1, bias=False)
-        self.encoder_q.maxpool = nn.Identity()
+        #self.encoder_q.conv1 = nn.Conv2d(3, 64, 3, 1, 1, bias=False)
+        #self.encoder_q.maxpool = nn.Identity()
         self.encoder_k = base_encoder(num_classes=dim)
-        self.encoder_k.conv1 = nn.Conv2d(3, 64, 3, 1, 1, bias=False)
-        self.encoder_k.maxpool = nn.Identity()
+        #self.encoder_k.conv1 = nn.Conv2d(3, 64, 3, 1, 1, bias=False)
+        #self.encoder_k.maxpool = nn.Identity()
         
         dim_mlp = self.encoder_q.fc.weight.shape[1]
         self.encoder_q.fc = nn.Sequential(nn.Linear(dim_mlp, dim_mlp), nn.ReLU(), self.encoder_q.fc)
