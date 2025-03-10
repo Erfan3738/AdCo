@@ -76,8 +76,8 @@ def update_sym_network(model,images,args,Memory_Bank,losses,top1,top5,optimizer,
     # negative logits: NxK
     model.zero_grad()
     q_pred, k_pred, q, k = model(im_q=images[0], im_k=images[1])
-    q = concat_all_gather(q)
-    k = concat_all_gather(k)
+    #q = concat_all_gather(q)
+    #k = concat_all_gather(k)
     l_pos1 = torch.einsum('nc,ck->nk', [q_pred, k.T])
     l_pos2=torch.einsum('nc,ck->nk', [k_pred, q.T])
     
@@ -135,7 +135,7 @@ def update_sym_network(model,images,args,Memory_Bank,losses,top1,top5,optimizer,
             torch.mean(torch.mul(p_qd2, l_neg2), dim=0), d_norm1)
         g = -0.5*torch.div(g1, torch.norm(d1, dim=0)) / args.mem_t - 0.5*torch.div(g2,
                                                                            torch.norm(d1, dim=0)) / args.mem_t  # c*k
-        g = all_reduce(g) / torch.distributed.get_world_size()
+        #g = all_reduce(g) / torch.distributed.get_world_size()
         Memory_Bank.v.data = args.momentum * Memory_Bank.v.data + g + args.mem_wd * Memory_Bank.W.data
         Memory_Bank.W.data = Memory_Bank.W.data - args.memory_lr * Memory_Bank.v.data
         logits1 = torch.softmax(logits1, dim=1)
@@ -293,15 +293,15 @@ def init_memory(train_loader, model,Memory_Bank, criterion,
             progress.display(i)
 
         # fill the memory bank
-        output = concat_all_gather(k)
-        batch_size = output.size(0)
+        #output = concat_all_gather(k)
+        batch_size = k.size(0)
         start_point = i * batch_size
         end_point = min((i + 1) * batch_size, args.cluster)
-        Memory_Bank.W.data[:, start_point:end_point] = output[:end_point - start_point].T
+        Memory_Bank.W.data[:, start_point:end_point] = k[:end_point - start_point].T
         if (i+1) * batch_size >= args.cluster:
             break
-    for param_q, param_k in zip(model.module.encoder_q.parameters(),
-                                model.module.encoder_k.parameters()):
+    for param_q, param_k in zip(model.encoder_q.parameters(),
+                                model.encoder_k.parameters()):
         param_k.data.copy_(param_q.data)  # initialize
 
 @torch.no_grad()
