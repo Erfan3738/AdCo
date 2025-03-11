@@ -91,9 +91,9 @@ def update_sym_network(model,images,args,Memory_Bank,losses,top1,top5,optimizer,
     logits2 /= args.moco_t
 
     cur_batch_size=logits1.shape[0]
-    cur_gpu=args.gpu
-    choose_match=cur_gpu*cur_batch_size
-    labels=torch.arange(choose_match,choose_match+cur_batch_size,dtype=torch.long).cuda()
+    #cur_gpu=args.gpu
+    #choose_match=cur_gpu*cur_batch_size
+    labels=torch.arange(cur_batch_size,dtype=torch.long).cuda()
 
     loss = 0.5*criterion(logits1, labels)+0.5*criterion(logits2, labels)
 
