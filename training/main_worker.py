@@ -147,6 +147,7 @@ def main_worker(gpu, args):
         print("Init memory bank finished!!")
 
     best_Acc=0
+    knn_path = os.path.join(save_path,"knn.log")
     for epoch in range(args.start_epoch, args.epochs):
 
 
@@ -161,6 +162,8 @@ def main_worker(gpu, args):
             print("gpu consuming after cleaning:", torch.cuda.memory_allocated()/1024/1024)
             acc=knn_monitor(model.encoder_q, val_loader, test_loader,epoch, args,global_k = 20) 
             print({'*KNN monitor Accuracy': acc})
+            with open(knn_path,'a+') as file:
+                file.write('%d epoch KNN monitor Accuracy %f\n'%(epoch,acc))
             
         is_best=best_Acc>acc1
         best_Acc=max(best_Acc,acc1)
