@@ -95,7 +95,7 @@ def update_sym_network(model,images,args,Memory_Bank,losses,top1,top5,optimizer,
     #choose_match=cur_gpu*cur_batch_size
     labels=torch.arange(cur_batch_size,dtype=torch.long).cuda()
 
-    loss = 0.5*criterion(logits1, labels)+0.5*criterion(logits2, labels)
+    loss = criterion(logits1, labels)#+0.5*criterion(logits2, labels)
 
 
     # acc1/acc5 are (K+1)-way contrast classifier accuracy
