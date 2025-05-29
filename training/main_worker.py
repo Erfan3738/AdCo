@@ -73,7 +73,7 @@ def main_worker(gpu, args):
                                 weight_decay=args.weight_decay)
     from model.optim import  LARS
     #optimizer = AdamW(model.parameters(), args.lr, betas=(0.9, 0.999), eps=1e-8, weight_decay=args.weight_decay)
-    optimizer = LARS(model.parameters(), args.lr ,weight_decay=args.weight_decay,momentum=args.momentum)
+    #optimizer = LARS(model.parameters(), args.lr ,weight_decay=args.weight_decay,momentum=args.momentum)
 
     # optionally resume from a checkpoint
     if args.resume:
