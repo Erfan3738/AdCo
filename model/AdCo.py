@@ -39,7 +39,7 @@ class ModelBase(nn.Module):
         # use split batchnorm
         norm_layer = partial(SplitBatchNorm, num_splits=bn_splits) if bn_splits > 1 else nn.BatchNorm2d
         resnet_arch = getattr(resnet, arch)
-        net = resnet_arch(num_classes=num_classes norm_layer=norm_layer)
+        net = resnet_arch(num_classes=num_classes , norm_layer=norm_layer)
 
         self.net = []
         for name, module in net.named_children():
