@@ -147,25 +147,25 @@ class AdCo(nn.Module):
                 k = self._batch_unshuffle_ddp(k, idx_unshuffle)
                 k = k.detach()
             return q_list, k
-        elif not self.sym:
-            q = self.encoder_q(im_q)  # queries: NxC
-            q = nn.functional.normalize(q, dim=1)
+        #elif not self.sym:
+           # q = self.encoder_q(im_q)  # queries: NxC
+           # q = nn.functional.normalize(q, dim=1)
             # compute key features
-            with torch.no_grad():  # no gradient to keys
+           # with torch.no_grad():  # no gradient to keys
                 # if update_key_encoder:
-                self._momentum_update_key_encoder()  # update the key encoder
+               # self._momentum_update_key_encoder()  # update the key encoder
 
                 # shuffle for making use of BN
-                im_k, idx_unshuffle = self._batch_shuffle_ddp(im_k)
+               # im_k, idx_unshuffle = self._batch_shuffle_ddp(im_k)
 
-                k = self.encoder_k(im_k)  # keys: NxC
-                k = nn.functional.normalize(k, dim=1)
+               # k = self.encoder_k(im_k)  # keys: NxC
+               # k = nn.functional.normalize(k, dim=1)
                 
                 # undo shuffle
-                k = self._batch_unshuffle_ddp(k, idx_unshuffle)
-                k = k.detach()
+               # k = self._batch_unshuffle_ddp(k, idx_unshuffle)
+               # k = k.detach()
 
-            return q, k
+           # return q, k
         else:
             q = self.encoder_q(im_q)  # queries: NxC
             q = nn.functional.normalize(q, dim=1)
