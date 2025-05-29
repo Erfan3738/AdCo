@@ -33,7 +33,7 @@ class ModelBase(nn.Module):
     (i) replaces conv1 with kernel=3, str=1
     (ii) removes pool1
     """
-    def __init__(self, feature_dim=128, arch=None, bn_splits=8):
+    def __init__(self, num_classes=128, arch=None, bn_splits=8):
         super(ModelBase, self).__init__()
 
         # use split batchnorm
