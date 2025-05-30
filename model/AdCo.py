@@ -33,7 +33,7 @@ class ModelBase(nn.Module):
     (i) replaces conv1 with kernel=3, str=1
     (ii) removes pool1
     """
-    def __init__(self, num_classes=128, arch=None, bn_splits=1):
+    def __init__(self, num_classes=128, arch=None, bn_splits=8):
         super(ModelBase, self).__init__()
         # use split batchnorm
         norm_layer = partial(SplitBatchNorm, num_splits=bn_splits) if bn_splits > 1 else nn.BatchNorm2d
@@ -68,7 +68,7 @@ class AdCo(nn.Module):
     Build a MoCo model with: a query encoder, a key encoder, and a queue
     https://arxiv.org/abs/1911.05722
     """
-    def __init__(self, base_encoder,args, dim=128, m=0.999, T=0.07, mlp=True, arch='resnet18', bn_splits=1):
+    def __init__(self, base_encoder,args, dim=128, m=0.999, T=0.07, mlp=True, arch='resnet18', bn_splits=8):
         """
         dim: feature dimension (default: 128)
         K: queue size; number of negative keys (default: 65536)
@@ -237,17 +237,17 @@ class AdCo(nn.Module):
                 # if update_key_encoder:
                 self._momentum_update_key_encoder()  # update the key encoder
 
-                #im_q_, idx_unshuffle = self._batch_shuffle_single_gpu(im_q)
-                q = self.encoder_k(im_q)  # keys: NxC
+                im_q_, idx_unshuffle = self._batch_shuffle_single_gpu(im_q)
+                q = self.encoder_k(im_q_)  # keys: NxC
                 q = nn.functional.normalize(q, dim=1)
-                #q = self._batch_unshuffle_single_gpu(q, idx_unshuffle)
+                q = self._batch_unshuffle_single_gpu(q, idx_unshuffle)
                 q = q.detach()
 
 
-                #im_k_, idx_unshuffle1 = self._batch_shuffle_single_gpu(im_k)
-                k = self.encoder_k(im_k)  # keys: NxC
+                im_k_, idx_unshuffle1 = self._batch_shuffle_single_gpu(im_k)
+                k = self.encoder_k(im_k_)  # keys: NxC
                 k = nn.functional.normalize(k, dim=1)
-                #k = self._batch_unshuffle_single_gpu(k, idx_unshuffle1)
+                k = self._batch_unshuffle_single_gpu(k, idx_unshuffle1)
                 k = k.detach()
                 
             return q_pred,k_pred,q, k
