@@ -33,7 +33,7 @@ class ModelBase(nn.Module):
     (i) replaces conv1 with kernel=3, str=1
     (ii) removes pool1
     """
-    def __init__(self, num_classes=128, arch=None, bn_splits=2):
+    def __init__(self, num_classes=128, arch=None, bn_splits=1):
         super(ModelBase, self).__init__()
         # use split batchnorm
         norm_layer = partial(SplitBatchNorm, num_splits=bn_splits) if bn_splits > 1 else nn.BatchNorm2d
@@ -68,7 +68,7 @@ class AdCo(nn.Module):
     Build a MoCo model with: a query encoder, a key encoder, and a queue
     https://arxiv.org/abs/1911.05722
     """
-    def __init__(self, base_encoder,args, dim=128, m=0.999, T=0.07, mlp=True, arch='resnet18', bn_splits=2):
+    def __init__(self, base_encoder,args, dim=128, m=0.999, T=0.07, mlp=True, arch='resnet18', bn_splits=1):
         """
         dim: feature dimension (default: 128)
         K: queue size; number of negative keys (default: 65536)
