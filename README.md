@@ -116,42 +116,21 @@ Performance:
 <th valign="bottom">Crop</th>
 <th valign="bottom">Symmetrical<br/>Loss</th>
 <th valign="bottom">AdCo<br/>top-1 acc.</th>
-<th valign="bottom">Model<br/>Link</th>
 <!-- TABLE BODY -->
-<tr><td align="left">ResNet-50</td>
+<tr><td align="left">ResNet-18</td>
 <td align="center">200</td>
 <td align="center">Single</td>
 <td align="center">No</td>
-<td align="center">68.6</td>
-<td align="center"><a href="https://purdue0-my.sharepoint.com/:u:/g/personal/wang3702_purdue_edu/EUZnXZAGrDFAoHEy7HxYsJgBqk7VDOjIGa1wUWXk2FArbQ?e=Gs9rXD">model</a></td>
-</tr>
+<td align="center">88.13</td>
+
 <tr><td align="left">ResNet-50</td>
 <td align="center">200</td>
 <td align="center">Multi</td>
 <td align="center">No</td>
 <td align="center">73.2</td>
-<td align="center"><a href="https://purdue0-my.sharepoint.com/:u:/g/personal/wang3702_purdue_edu/EQKYrTt0nolMrKYLQ-FPHR4Be6ZA-pPXa9HQArhFQqEr2g?e=A2gCdH">model</a></td>
-</tr>
-<tr><td align="left">ResNet-50</td>
-<td align="center">800</td>
-<td align="center">Single</td>
-<td align="center">No</td>
-<td align="center">72.8</td>
-<td align="center">None</td>
-</tr>
-<tr><td align="left">ResNet-50</td>
-<td align="center">800</td>
-<td align="center">Multi</td>
-<td align="center">No</td>
-<td align="center">75.7</td>
-<td align="center">None</td>
-</tr>
-<tr><td align="left">ResNet-50</td>
-<td align="center">200</td>
-<td align="center">Single</td>
-<td align="center">Yes</td>
-<td align="center">70.6</td>
-<td align="center"><a href="https://purdue0-my.sharepoint.com/:u:/g/personal/wang3702_purdue_edu/EQAk2hTJo3NPl8TggXdzE6wB4yGEMD8_pRVcRhxlYCpSLQ?e=8wdc4a">model</a></td>
+
+
+
 </tr>
 </tbody></table>
 
