@@ -7,18 +7,28 @@
    <img src="https://img.shields.io/badge/licence-GNU-green">
 </a>   
 
-AdCo is a contrastive-learning based self-supervised learning methods, which is published on [CVPR2021](https://openaccess.thecvf.com/content/CVPR2021/html/Hu_AdCo_Adversarial_Contrast_for_Efficient_Learning_of_Unsupervised_Representations_From_CVPR_2021_paper.html).
+This is an alternate implementation of AdCo with following changes:
+1- The original code was meant to run on multiple GPUs. Although you can actually use that code for a single-GPU setup, it seemed to me that it would add some delay and perhaps computational overhead. The code in this repo can be run on a single GPU easily.
+
+2- The architecure of conventional resnets proposed in "Deep Residual Learning for Image Recognition" paper was changed in accordance with the needs for 
+   CIFAR-10 dataset. ( other options may be employed given enough processing power)
+
+3- transformations were changed to match with CIFAR-10 images.
+
+4- I tried to find the best possible hyperparameters.
+  
+
+AdCo is published on [CVPR2021](https://openaccess.thecvf.com/content/CVPR2021/html/Hu_AdCo_Adversarial_Contrast_for_Efficient_Learning_of_Unsupervised_Representations_From_CVPR_2021_paper.html).
 
 Copyright (C) 2020 Qianjiang Hu*, Xiao Wang*, Wei Hu, Guo-Jun Qi
 
 License: MIT for academic use.
 
-Contact: Guo-Jun Qi (guojunq@gmail.com)
+Contact: erfankolsoumian@gmail.com
 
-## Upgraded Version: Adco-v2: [CaCo](https://github.com/maple-research-lab/CaCo)
 
-## Introduction
-Contrastive learning relies on constructing a collection of negative examples that are sufficiently hard to discriminate against positive queries when their representations are self-trained. Existing contrastive learning methods either maintain a queue of negative samples over minibatches while only a small portion of them are updated in an iteration, or only use the other examples from the current minibatch as negatives. They could not closely track the change of the learned representation over iterations by updating the entire queue as a whole, or discard the useful information from the past minibatches. Alternatively, we present to directly learn a set of negative adversaries playing against the self-trained representation. Two players, the representation network and negative adversaries, are alternately updated to obtain the most challenging negative examples against which the representation of positive queries will be trained to discriminate. We further show that the negative adversaries are updated towards a weighted combination of positive queries by maximizing the adversarial contrastive loss, thereby allowing them to closely track the change of representations over time. Experiment results demonstrate the proposed Adversarial Contrastive (AdCo) model not only achieves superior performances (a top-1 accuracy of 73.2% over 200 epochs and 75.7% over 800 epochs with linear evaluation on ImageNet), but also can be pre-trained more efficiently with much shorter GPU time and fewer epochs.
+
+
 
 
 ## Installation  
