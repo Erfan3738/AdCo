@@ -80,25 +80,12 @@ conda deactivate(If you want to exit)
 #### Single Crop
 ##### 1 Without symmetrical loss:
 ```
-python3 main_adco.py --sym=0 --lr=0.03 --memory_lr=3 --moco_t=0.12 --mem_t=0.02 --data=./datasets/imagenet2012 --dist_url=tcp://localhost:10001 
+python3 main_adco.py --sym=1 --lr=0.04 --memory_lr=3.0 --moco_t=0.14 --mem_t=0.03 --data=./datasets/imagenet2012 --dist_url=tcp://localhost:10001 --multiprocessing_distributed=0 --gpu 0 --arch resnet18 --workers=4 --epochs  800 --batch_size 256 --lr_final 0.0006 --moco_m 0.999 --cluster 8192
 ```
 ##### 2 With symmetrical loss:
 ```
-python3 main_adco.py --sym=1 --lr=0.03 --memory_lr=3 --moco_t=0.12 --mem_t=0.02 --data=./datasets/imagenet2012 --dist_url=tcp://localhost:10001
+python3 main_adco.py --sym=1 --lr=0.04 --memory_lr=3.0 --moco_t=0.14 --mem_t=0.03 --data=./datasets/imagenet2012 --dist_url=tcp://localhost:10001 --multiprocessing_distributed=0 --gpu 0 --arch resnet18 --workers=4 --epochs  800 --batch_size 256 --lr_final 0.0006 --moco_m 0.999 --cluster 8192
 ```
-#### 3 setting different numbers of negative samples:
-```
-# e.g., training with 8192 negative samples and symmetrical loss
-python3 main_adco.py --sym=1 --lr=0.04 --memory_lr=3 --moco_t=0.14 --mem_t=0.03 --cluster 8192 --data=./datasets/imagenet2012 --dist_url=tcp://localhost:10001
-```
-
-#### Multi Crop
-```
-python3 main_adco.py --multi_crop=1 --lr=0.03 --memory_lr=3 --moco_t=0.12 --mem_t=0.02 --data=./datasets/imagenet2012 --dist_url=tcp://localhost:10001
-```
-
-
-
 
 
 ### Linear Classification
