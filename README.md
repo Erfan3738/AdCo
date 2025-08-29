@@ -11,10 +11,9 @@ This is an alternate implementation of AdCo with following changes:
 
 1- The original code was meant to run on multiple GPUs. Although you can actually use that code for a single-GPU setup, it seemed to me that it would add some delay and perhaps computational overhead. The code in this repo can be run on a single GPU easily.
 
-2- The architecure of conventional resnets proposed in "Deep Residual Learning for Image Recognition" paper was changed in accordance with the needs for 
-   CIFAR-10 dataset. ( other options may be employed given enough processing power)
+2- The architecture of conventional ResNets, as proposed in the paper "Deep Residual Learning for Image Recognition," was modified to meet the needs of the CIFAR-10 dataset (other options may be employed given sufficient processing power).
 
-3- transformations were changed to match with CIFAR-10 images.
+3- The transformations were adjusted to match the CIFAR-10 images.
 
 4- I tried to find the best possible hyperparameters.
   
