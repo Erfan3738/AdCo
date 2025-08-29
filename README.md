@@ -123,7 +123,7 @@ Performance:
 <td align="center">No</td>
 <td align="center">88.13</td>
 
-<tr><td align="left">ResNet-50</td>
+<tr><td align="left">ResNet-18</td>
 <td align="center">800</td>
 <td align="center">Single</td>
 <td align="center">Yes</td>
