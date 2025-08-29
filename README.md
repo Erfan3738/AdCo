@@ -118,16 +118,16 @@ Performance:
 <th valign="bottom">AdCo<br/>top-1 acc.</th>
 <!-- TABLE BODY -->
 <tr><td align="left">ResNet-18</td>
-<td align="center">200</td>
+<td align="center">800</td>
 <td align="center">Single</td>
 <td align="center">No</td>
 <td align="center">88.13</td>
 
 <tr><td align="left">ResNet-50</td>
-<td align="center">200</td>
-<td align="center">Multi</td>
-<td align="center">No</td>
-<td align="center">73.2</td>
+<td align="center">800</td>
+<td align="center">Single</td>
+<td align="center">Yes</td>
+<td align="center">90.27</td>
 
 
 
