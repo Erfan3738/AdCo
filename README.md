@@ -115,7 +115,7 @@ Performance:
 <th valign="bottom">pre-train<br/>epochs</th>
 <th valign="bottom">Crop</th>
 <th valign="bottom">Symmetrical<br/>Loss</th>
-<th valign="bottom">AdCo<br/>top-1 acc.</th>
+<th valign="bottom">AdCo<br/>KNN acc.</th>
 <!-- TABLE BODY -->
 <tr><td align="left">ResNet-18</td>
 <td align="center">800</td>
