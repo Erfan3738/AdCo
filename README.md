@@ -16,6 +16,8 @@ This is a modified version of original AdCo code with following changes:
 3- The transformations were adjusted to match the CIFAR-10 images.
 
 4- I tried to find the best possible hyperparameters.
+
+5- Added the option to simulate the behavior of multiple GPUs using split batch normalization.
   
 
 AdCo is published on [CVPR2021](https://openaccess.thecvf.com/content/CVPR2021/html/Hu_AdCo_Adversarial_Contrast_for_Efficient_Learning_of_Unsupervised_Representations_From_CVPR_2021_paper.html).
