@@ -71,15 +71,12 @@ Each time when you want to run my code, simply activate the environment by
 conda activate AdCo
 conda deactivate(If you want to exit) 
 ```
-#### 4 Prepare the ImageNet dataset
-##### 4.1 Download the [ImageNet2012 Dataset](http://image-net.org/challenges/LSVRC/2012/) under "./datasets/imagenet2012".
-##### 4.2 Go to path "./datasets/imagenet2012/val"
-##### 4.3 move validation images to labeled subfolders, using [the following shell script](https://raw.githubusercontent.com/soumith/imagenetloader.torch/master/valprep.sh)
+
+
 
 ## Usage
 
 ### Unsupervised Training
-This implementation only supports multi-gpu, DistributedDataParallel training, which is faster and simpler; single-gpu or DataParallel training is not supported.
 #### Single Crop
 ##### 1 Without symmetrical loss:
 ```
@@ -102,10 +99,10 @@ python3 main_adco.py --multi_crop=1 --lr=0.03 --memory_lr=3 --moco_t=0.12 --mem_
 
 
 
-<font size=0 >So far we have yet to support multi crop with symmetrical loss, the feature will be added in future.</font>
+
 
 ### Linear Classification
-With a pre-trained model, we can easily evaluate its performance on ImageNet with:
+With a pre-trained model, we can easily evaluate its performance on desired dataset with:
 ```
 python3 lincls.py --data=./datasets/imagenet2012 --dist-url=tcp://localhost:10001 --pretrained=input.pth.tar
 ```
