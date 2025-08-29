@@ -217,51 +217,12 @@ Performance with different negative samples:
 </tbody></table>
 
 
-The performance is obtained on a single machine with 8*V100 GPUs.
 
 
-### Transfering to VOC07 Classification
-#### 1 Download [Dataset](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar) under "./datasets/voc"
-#### 2 Linear Evaluation:
-```
-cd VOC_CLF
-python3 main.py --data=../datasets/voc --pretrained=../input.pth.tar
-```
-Here VOC directory should be the directory includes "vockit" directory.
 
-### Transfer to Places205 Classification
-#### 1 Download [Dataset](http://places.csail.mit.edu/user/index.php) under "./datasets/places205"
-#### 2 Linear Evaluation:
-```
-python3 lincls.py --dataset=Place205 --sgdr=1 --data=./datasets/places205 --lr=5 --dist-url=tcp://localhost:10001 --pretrained=input.pth.tar
-```
 
-### Transfer to Object Detection
-#### 1. Install [detectron2](https://github.com/facebookresearch/detectron2/blob/master/INSTALL.md).
 
-#### 2. Convert a pre-trained AdCo model to detectron2's format:
-   ```
-   # in detection folder
-   python3 convert-pretrain-to-detectron2.py input.pth.tar output.pkl
-   ```
 
-#### 3. download [VOC Dataset](http://places.csail.mit.edu/user/index.php) and [COCO Dataset](https://cocodataset.org/#download) under "./detection/datasets" directory,
-   following the [directory structure](https://github.com/facebookresearch/detectron2/tree/master/datasets)
-	 requried by detectron2.
-
-#### 4. Run training:
-##### 4.1 Pascal detection
-Number of GPU will influence the overall batch size, thus all the experiments should be done with 8 GPUs. If with less GPUs, please finetune the SOLVER.BASE_LR based on your condition.
-   ```
-   cd detection
-   python train_net.py --config-file configs/pascal_voc_R_50_C4_24k_adco.yaml --num-gpus 8 MODEL.WEIGHTS ./output.pkl
-   ```
-##### 4.2 COCO detection
-Number of GPU will influence the overall batch size, thus all the experiments should be done with 8 GPUs. If with less GPUs, please finetune the SOLVER.BASE_LR based on your condition.
-```
-   cd detection
-   python train_net.py --config-file configs/coco_R_50_C4_2x_adco.yaml --num-gpus 8 MODEL.WEIGHTS ./output.pkl
-   ```
 
 ## Citation:
 [AdCo: Adversarial Contrast for Efficient Learning of Unsupervised Representations from Self-Trained Negative Adversaries](https://arxiv.org/pdf/2011.08435.pdf).  
