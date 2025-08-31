@@ -20,6 +20,8 @@ This is a modified version of original AdCo code with following changes:
 5- Added the option to simulate the behavior of multiple GPUs using split batch normalization.
 
 6- The original code did not use KNN for validation and relied only on linear evaluation. Since learning metrics need to be monitored during training, I added an option to use KNN after a user-defined number of epochs.
+
+7- Added "batch_shuffle_single_gpu" to shuffle queries and make use of shuffleBN on single gpu ( must be used with splitbatchnorm)
   
 
 AdCo is published on [CVPR2021](https://openaccess.thecvf.com/content/CVPR2021/html/Hu_AdCo_Adversarial_Contrast_for_Efficient_Learning_of_Unsupervised_Representations_From_CVPR_2021_paper.html).
