@@ -30,7 +30,9 @@ Copyright (C) 2020 Qianjiang Hu*, Xiao Wang*, Wei Hu, Guo-Jun Qi
 
 License: MIT for academic use.
 
-Contact: erfankolsoumian@gmail.com
+To Contact authors of the paper: Xiao Wang (wang3702@purdue.edu), Guo-Jun Qi (guojunq@gmail.com)
+
+To contact me: erfankolsoumian@gmail.com
 
 
 
